@@ -1,0 +1,551 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <title>InfernoCool UnderGuard | Climate-Adaptive Smart Innerwear</title>
+    <!-- Google Fonts + Font Awesome -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;14..32,400;14..32,500;14..32,600;14..32,700;14..32,800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #03050A;
+            color: #EFF3F8;
+            overflow-x: hidden;
+            scroll-behavior: smooth;
+        }
+
+        /* modern gradients and glows */
+        :root {
+            --primary: #F05A28;
+            --primary-dark: #d94a1a;
+            --glass: rgba(15, 25, 45, 0.65);
+        }
+
+        /* background tech grid + glow */
+        .bg-tech {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: 
+                linear-gradient(rgba(240, 90, 40, 0.03) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(240, 90, 40, 0.03) 1px, transparent 1px);
+            background-size: 50px 50px;
+            pointer-events: none;
+            z-index: -1;
+        }
+
+        .bg-blur {
+            position: fixed;
+            top: 20%;
+            right: -10%;
+            width: 60vw;
+            height: 60vw;
+            background: radial-gradient(circle, rgba(240,90,40,0.15), transparent 70%);
+            filter: blur(80px);
+            pointer-events: none;
+            z-index: -1;
+        }
+
+        .container {
+            max-width: 1280px;
+            margin: 0 auto;
+            padding: 0 2rem;
+            position: relative;
+            z-index: 2;
+        }
+
+        /* glass navbar */
+        .navbar {
+            padding: 1.2rem 0;
+            backdrop-filter: blur(16px);
+            background: rgba(3, 5, 10, 0.75);
+            border-bottom: 1px solid rgba(240, 90, 40, 0.25);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .nav-flex {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 1rem;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .logo-icon {
+            width: 44px;
+            height: 44px;
+            background: linear-gradient(145deg, var(--primary), #B53A10);
+            border-radius: 16px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 800;
+            font-size: 1.7rem;
+            box-shadow: 0 0 15px rgba(240,90,40,0.4);
+        }
+
+        .logo-text {
+            font-weight: 700;
+            font-size: 1.4rem;
+            letter-spacing: -0.3px;
+            background: linear-gradient(120deg, #FFF, var(--primary));
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+        }
+
+        .nav-links a {
+            color: #CCD6F6;
+            text-decoration: none;
+            font-weight: 500;
+            transition: 0.2s;
+            font-size: 0.95rem;
+        }
+
+        .nav-links a:hover {
+            color: var(--primary);
+        }
+
+        .btn-outline {
+            border: 1px solid var(--primary);
+            background: transparent;
+            padding: 8px 20px;
+            border-radius: 40px;
+            font-weight: 600;
+            transition: 0.2s;
+            cursor: default;
+            color: white;
+        }
+
+        .btn-primary {
+            background: linear-gradient(95deg, var(--primary), var(--primary-dark));
+            padding: 12px 32px;
+            border-radius: 40px;
+            font-weight: 700;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            border: none;
+            color: white;
+            transition: 0.2s;
+            text-decoration: none;
+            box-shadow: 0 6px 14px rgba(240,90,40,0.25);
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 12px 24px rgba(240,90,40,0.35);
+        }
+
+        /* hero */
+        .hero {
+            min-height: 90vh;
+            display: flex;
+            align-items: center;
+            padding: 4rem 0;
+        }
+
+        .hero-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 3rem;
+            align-items: center;
+        }
+
+        .hero-title {
+            font-size: 3.4rem;
+            font-weight: 800;
+            line-height: 1.2;
+            margin-bottom: 1rem;
+        }
+
+        .hero-desc {
+            font-size: 1.1rem;
+            color: #A8B2D1;
+            margin-bottom: 1.5rem;
+        }
+
+        .tagline-orange {
+            color: var(--primary);
+            font-weight: 600;
+            letter-spacing: 1px;
+            margin-bottom: 0.75rem;
+        }
+
+        .image-card {
+            background: linear-gradient(145deg, #111827, #070b14);
+            border-radius: 32px;
+            overflow: hidden;
+            box-shadow: 0 25px 40px -12px black;
+            border: 1px solid rgba(240,90,40,0.3);
+            transition: 0.3s;
+        }
+
+        .image-card img {
+            width: 100%;
+            height: auto;
+            display: block;
+            aspect-ratio: 4/3;
+            object-fit: cover;
+        }
+
+        section {
+            padding: 5rem 0;
+            border-bottom: 1px solid rgba(255,255,255,0.05);
+        }
+
+        h2 {
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin-bottom: 1.5rem;
+            letter-spacing: -0.02em;
+            background: linear-gradient(135deg, #FFF, var(--primary));
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            display: inline-block;
+        }
+
+        .content-block {
+            font-size: 1rem;
+            line-height: 1.6;
+            color: #D1D9F0;
+        }
+
+        .content-block p {
+            margin-bottom: 1.2rem;
+        }
+
+        .feature-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 2rem;
+            margin: 2rem 0;
+        }
+
+        .tech-card {
+            background: rgba(20, 30, 45, 0.5);
+            backdrop-filter: blur(8px);
+            border-radius: 1.8rem;
+            padding: 1.8rem;
+            border: 1px solid rgba(240,90,40,0.2);
+        }
+
+        .quote-modern {
+            background: linear-gradient(120deg, rgba(240,90,40,0.08), rgba(0,0,0,0.2));
+            border-left: 4px solid var(--primary);
+            padding: 1.5rem;
+            border-radius: 1rem;
+            font-style: normal;
+            margin: 1.5rem 0;
+        }
+
+        .list-valid {
+            list-style: none;
+            margin: 1rem 0;
+        }
+        .list-valid li {
+            margin-bottom: 0.6rem;
+            display: flex;
+            gap: 10px;
+        }
+        .list-valid li i {
+            color: var(--primary);
+            margin-top: 4px;
+        }
+
+        .two-col {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 2rem;
+            margin: 2rem 0;
+        }
+
+        .mission-card {
+            background: #0F1622;
+            border-radius: 1.5rem;
+            padding: 1.8rem;
+        }
+
+        .audience-card {
+            background: #0E1525;
+            border-radius: 1.5rem;
+            padding: 1.5rem;
+        }
+
+        .impact-stat {
+            background: rgba(240,90,40,0.06);
+            border-radius: 1.5rem;
+            padding: 1.5rem;
+        }
+
+        .footer {
+            text-align: center;
+            padding: 3rem 0;
+            color: #7F8EA3;
+        }
+
+        @media (max-width: 900px) {
+            .hero-grid {
+                grid-template-columns: 1fr;
+                text-align: center;
+            }
+            .nav-links {
+                display: none;
+            }
+            .container {
+                padding: 0 1.5rem;
+            }
+            .hero-title {
+                font-size: 2.2rem;
+            }
+            h2 {
+                font-size: 1.8rem;
+            }
+            .two-col {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+<div class="bg-tech"></div>
+<div class="bg-blur"></div>
+
+<nav class="navbar">
+    <div class="container nav-flex">
+        <div class="logo">
+            <div class="logo-icon">❄️🔥</div>
+            <div class="logo-text">INFERNOCOOL® UNDERGUARD</div>
+        </div>
+        <div class="nav-links">
+            <a href="#home">Home</a>
+            <a href="#innovation">Innovation</a>
+            <a href="#about">About</a>
+            <a href="#audience">Audience</a>
+            <a href="#impact">Impact</a>
+        </div>
+        <div class="btn-outline">Pre-Incorporation</div>
+    </div>
+</nav>
+
+<main>
+    <!-- Tab 1: Home Page (exact) -->
+    <section id="home" class="hero">
+        <div class="container hero-grid">
+            <div>
+                <div class="tagline-orange">InfernoCool UnderGuard</div>
+                <h1 class="hero-title">Unveiling the world's first climate-adaptive undergarment</h1>
+                <p class="hero-desc"><strong>Tagline:</strong> Comfort where it matters...<br>
+                <strong>Supporting Line:</strong> Smart innerwear engineered to protect your core in heat and cold.</p>
+                <a href="#innovation" class="btn-primary"><i class="fas fa-mobile-alt"></i> Discover the technology</a>
+            </div>
+            <div class="image-card">
+                <img src="https://developers.elementor.com/docs/assets/img/elementor-placeholder-image.png" alt="InfernoCool UnderGuard smart garment with app control visualization">
+            </div>
+        </div>
+    </section>
+
+    <!-- Tab 2: Introducing the World's First Climate-Adaptive Undergarment (exact copy) -->
+    <section id="innovation">
+        <div class="container">
+            <h2>Introducing the World's First Climate-Adaptive Undergarment</h2>
+            <div class="content-block">
+                <p>InfernoCool UnderGuard is a breakthrough in wearable technology — a smart, modular undergarment engineered to deliver precision thermal regulation directly to the body's core.</p>
+                <p>Unlike traditional gear that only shields the exterior, InfernoCool protects where discomfort is most often ignored. Powered by Graphene heating films and a two-tier active cooling system, it allows you to stabilize your temperature instantly — whether you are enduring the tropical humidity of Singapore, the desert heat of Dubai, or the icy winds of Siberia.</p>
+                <p>With our dedicated smartphone app, you command your own micro-climate at the push of a button.</p>
+                <div class="quote-modern">
+                    This isn't just clothing — it's climate-adaptive resilience, engineered for those who refuse to let the environment dictate their comfort.
+                </div>
+            </div>
+            <!-- additional imagery to reflect app + tech -->
+            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem; margin-top: 1rem;">
+                <div class="image-card"><img src="https://developers.elementor.com/docs/assets/img/elementor-placeholder-image.png" alt="Smartphone app controlling undergarment temperature"></div>
+                <div class="image-card"><img src="https://developers.elementor.com/docs/assets/img/elementor-placeholder-image.png" alt="Graphene heating and cooling layers"></div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Tab 3: About Us (exact content, no extra, no missing) -->
+    <section id="about">
+        <div class="container">
+            <h2>InfernoCool UnderGuard Story - From Vision to Validation and the Story Continues...</h2>
+            <div class="content-block">
+                <p>InfernoCool UnderGuard did not start in a lab; it began with the observation of a universal human need.</p>
+                <p>While traditional academic paths often overlook the practicalities of physical endurance, our founder's journey was built on the front lines of the service industry. After pivoting from early academic challenges to pursue a Diploma in Hotel Management and Catering, he spent 26 years leading hospitality and events. Rising from entry-level operations to Head of Events, he spent nearly three decades managing high-pressure environments where human comfort is paramount.</p>
+                <p>This was a 26-year "field study" into the physical toll of environmental stress on the human body. He didn't just see a science problem; he identified a critical gap in personal thermal protection that traditional apparel had failed to solve for over a century.</p>
+                <p><strong>The Breakthrough</strong></p>
+                <p>In the summer of 2025, that decade-long vision finally met the page. In a hotel room in Chiang Mai, the technical architecture for InfernoCool UnderGuard was finalized.</p>
+                <p>Over three intensive months, the system was engineered to answer a single, bold question:</p>
+                <p><em>"What if you could command your own climate at the push of a button?"</em></p>
+                <p>The journey was fueled by a fundamental truth:</p>
+                <p>Everything in this universe starts with thought, vision, and imagination - and the grit to give birth to the product.</p>
+                <p><strong>The Path to Reality: Validated & Ready</strong></p>
+                <p>We haven't just dreamt of a product; we have engineered a solution that has stood up to the scrutiny of the world's leading technical and legal experts. We have cleared the most difficult hurdles of the Concept Phase:</p>
+                <ul class="list-valid">
+                    <li><i class="fas fa-check-circle"></i> <strong>Intellectual Property:</strong> Backed by premier patent firms Amica Law LLC and Mark & Clerk LLC, who confirmed the uniqueness of the invention and moved us toward patenting.</li>
+                    <li><i class="fas fa-check-circle"></i> <strong>Technical Feasibility:</strong> Reviewed by the Agency for Science, Technology and Research (ASTAR) and AJProTech USA, with both institutions confirming the design is ready for the prototyping phase.</li>
+                    <li><i class="fas fa-check-circle"></i> <strong>Strategic Endorsement:</strong> Officially endorsed by Enterprise Singapore as a product ready for funding and development.</li>
+                </ul>
+                <p><strong>What's Next?</strong></p>
+                <p>Today, InfernoCool UnderGuard stands as proof that grit and imagination are just as vital as any degree.</p>
+                <p>We have finalized the blueprints, secured the IP, and mapped the engineering. We are now entering the production phase to bring this 10-year vision into the hands — and lives — of those who refuse to let the environment dictate their comfort.</p>
+            </div>
+
+            <!-- Our Mission & Our Vision (exact) -->
+            <div class="two-col">
+                <div class="mission-card">
+                    <h3 style="color: var(--primary); margin-bottom: 0.75rem;">Our Mission</h3>
+                    <p>To deliver precision climate-adaptive comfort through integrated thermal technology, empowering individuals to command their own environment at the push of a button.</p>
+                    <p>We exist to protect the body's core — the critical zone where thermal stress is most ignored — by bridging human-centric design, textile innovation, and active engineering.</p>
+                    <p>InfernoCool UnderGuard is built for the resilient: those who refuse to let environmental extremes dictate their performance or their comfort.</p>
+                </div>
+                <div class="mission-card">
+                    <h3 style="color: var(--primary); margin-bottom: 0.75rem;">Our Vision</h3>
+                    <p>To redefine human resilience by making climate-adaptive comfort a universal standard.</p>
+                    <p>We envision a world where no individual is limited by environmental extremes — where technology empowers people to thrive in any condition, anywhere.</p>
+                    <p>InfernoCool UnderGuard seeks to pioneer a future where personal climate autonomy is not a luxury, but a right.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Tab: Target Audience (exact wording, no changes) -->
+    <section id="audience">
+        <div class="container">
+            <h2>Target Audience: Climate Resilience for Every Environment</h2>
+            <div class="content-block">
+                <p>InfernoCool UnderGuard was engineered for those who refuse to let the mercury dictate their performance. Whether you are navigating a high-humidity commute or stationed in an arctic outpost, our technology provides the thermal stability you need to stay focused, safe, and comfortable.</p>
+            </div>
+            <div class="feature-grid">
+                <div class="audience-card">
+                    <h3>1. The Everyday Professional & Global Traveler</h3>
+                    <p>For those navigating the "Urban Heat Island" effect or transitioning between extreme climates.</p>
+                    <p><strong>City Commuters:</strong> Maintain a fresh, sweat-free core while moving from sweltering platforms to air-conditioned offices.<br>
+                    <strong>Global Travelers:</strong> Land in a new climate and adapt instantly. From the humidity of Singapore to the winter winds of New York, your comfort is just one tap away on your smartphone.<br>
+                    <strong>Executive Mobility:</strong> Stay composed in professional settings without the physical fatigue caused by temperature fluctuations.</p>
+                </div>
+                <div class="audience-card">
+                    <h3>2. The Industrial Frontline & Defense</h3>
+                    <p>For those whose "office" is the open elements and where thermal stress is a matter of safety.</p>
+                    <p><strong>Delivery & Logistics:</strong> A critical tool for riders in high-heat zones like Dubai or Riyadh, reducing heat exhaustion and improving focus during long shifts.<br>
+                    <strong>Energy & Oil Rig Workers:</strong> Reliable core protection for offshore platforms and desert drilling sites where ambient temperatures reach dangerous levels.<br>
+                    <strong>Military & Security:</strong> Enhancing operational readiness in high-altitude or desert deployments by stabilizing body temperature under heavy gear.</p>
+                </div>
+                <div class="audience-card">
+                    <h3>3. The Extreme Athlete & Outdoor Enthusiast</h3>
+                    <p>For those who push the boundaries of human endurance in nature's harshest theaters.</p>
+                    <p><strong>Mountaineers & Skiers:</strong> Immediate, app-controlled warmth to prevent the onset of hypothermia in sub-zero alpine conditions.<br>
+                    <strong>Endurance Runners:</strong> Active cooling to manage internal heat spikes during high-intensity training in tropical or desert climates.<br>
+                    <strong>Outdoor Explorers:</strong> Lightweight, modular protection that replaces bulky traditional layers, allowing for greater mobility without sacrificing warmth.</p>
+                </div>
+            </div>
+            <div class="quote-modern" style="background: #0F1622; margin-top: 1rem;">
+                <p><strong>Why InfernoCool UnderGuard?</strong> Standard apparel protects your exterior. InfernoCool protects your core.</p>
+                <p>By focusing on the lower abdominal and groin region — the body's most sensitive thermal zone — we provide a precision solution that reduces sweat-related hygiene issues, prevents heat stress, and mitigates the physical toll of extreme cold.</p>
+                <p>Wherever you go, you are now in command of your climate.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Tab: Impact / Sustainability (exact from PDF) -->
+    <section id="impact">
+        <div class="container">
+            <h2>The Impact: Conservation, Resilience & Equity</h2>
+            <div class="feature-grid">
+                <div class="impact-stat">
+                    <h3>1. Thermal Efficiency vs. Ambient Cooling</h3>
+                    <p>Traditional climate control (HVAC) is energetically expensive, cooling entire buildings to keep a few individuals comfortable.</p>
+                    <p><strong>The Impact:</strong> InfernoCool shifts the energy requirement from the room to the person. By regulating the micro-climate directly at the body's core, we provide comfort at a fraction of the carbon footprint required by traditional air conditioning or industrial heating.</p>
+                </div>
+                <div class="impact-stat">
+                    <h3>2. Sustainable Material Science</h3>
+                    <p>Our "Bio-Interface" (Layer 1) is engineered using renewable, high-performance fibers:</p>
+                    <p><strong>TENCEL™ & Bamboo:</strong> Selected for their low-impact manufacturing process, natural anti-bacterial properties, and superior moisture management. <strong>Durability & Longevity:</strong> Unlike "fast fashion" disposables, our modular design allows users to replace the fabric shell while retaining the high-value technical components, significantly reducing textile waste.</p>
+                </div>
+                <div class="impact-stat">
+                    <h3>3. Human Resilience & Social Impact</h3>
+                    <p>Climate change disproportionately affects the outdoor workforce. InfernoCool serves as a vital tool for Social Equity in labor.</p>
+                    <p><strong>Health & Safety:</strong> Reducing the incidence of heatstroke, chronic thermal fatigue, and cold-related illness for delivery riders and industrial workers. <strong>Productivity:</strong> Enabling essential services to continue safely in regions where "wet-bulb" temperatures are reaching dangerous thresholds.</p>
+                    <p><strong>InfernoCool UnderGuard is not just about comfort — it's about conservation, resilience, and equity in a warming world.</strong></p>
+                </div>
+            </div>
+            <!-- additional image gallery (placeholders) to show product/app context -->
+            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px,1fr)); gap: 1.5rem; margin-top: 2rem;">
+                <div class="image-card"><img src="https://developers.elementor.com/docs/assets/img/elementor-placeholder-image.png" alt="InfernoCool app interface adjusting temperature"></div>
+                <div class="image-card"><img src="https://developers.elementor.com/docs/assets/img/elementor-placeholder-image.png" alt="Smart undergarment graphene heating zones"></div>
+                <div class="image-card"><img src="https://developers.elementor.com/docs/assets/img/elementor-placeholder-image.png" alt="Climate adaptive innerwear for urban professionals"></div>
+            </div>
+        </div>
+    </section>
+
+    <!-- final subtle branding (exact PDF name & status) -->
+    <section style="border-bottom: none; text-align: center; padding-bottom: 2.5rem;">
+        <div class="container">
+            <p style="color: #A8B2D1;">Name of Company : InfernoCool UnderGuard Pte. Ltd (Pre-Incorporation)<br>
+            Tagline : Comfort where it matters... | Logo : Completed and will be shared</p>
+            <div style="margin-top: 1.5rem; display: flex; justify-content: center; gap: 1.2rem; flex-wrap: wrap;">
+                <span class="btn-outline" style="cursor: default;"><i class="fas fa-charging-station"></i> Graphene heating</span>
+                <span class="btn-outline" style="cursor: default;"><i class="fas fa-wind"></i> Active cooling</span>
+                <span class="btn-outline" style="cursor: default;"><i class="fas fa-bluetooth-b"></i> Smartphone app</span>
+            </div>
+        </div>
+    </section>
+</main>
+
+<footer class="footer">
+    <div class="container">
+        <p>© InfernoCool UnderGuard Pte. Ltd (Pre-Incorporation) — Engineered for resilience. IP secured & Enterprise Singapore endorsed.</p>
+    </div>
+</footer>
+
+<!-- simple scroll reveal for better modern feel -->
+<script>
+    const faders = document.querySelectorAll('section, .tech-card, .audience-card, .impact-stat, .mission-card');
+    const appearOptions = { threshold: 0.1, rootMargin: "0px 0px -40px 0px" };
+    const appearOnScroll = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (!entry.isIntersecting) return;
+            entry.target.style.opacity = '1';
+            entry.target.style.transform = 'translateY(0)';
+            appearOnScroll.unobserve(entry.target);
+        });
+    }, appearOptions);
+    faders.forEach(el => {
+        el.style.opacity = '0';
+        el.style.transform = 'translateY(18px)';
+        el.style.transition = 'opacity 0.5s ease, transform 0.5s ease';
+        appearOnScroll.observe(el);
+    });
+    document.querySelectorAll('.hero-grid, .image-card').forEach(el => {
+        el.style.opacity = '0';
+        el.style.transform = 'translateY(15px)';
+        el.style.transition = 'opacity 0.6s ease 0.1s, transform 0.5s ease';
+        setTimeout(() => { el.style.opacity = '1'; el.style.transform = 'translateY(0)'; }, 150);
+    });
+</script>
+</body>
+</html>
